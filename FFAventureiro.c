@@ -26,6 +26,7 @@ int main() {
         printf("1. Adicionar item\n");
         printf("2. Remover item\n");
         printf("3. Listar itens\n");
+        printf("4. Buscar item por nome\n");   // 🔍 NOVA OPÇÃO
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
@@ -86,7 +87,7 @@ int main() {
         }
 
         case 3:
-            
+         
             printf("\n===== ITENS NA MOCHILA =====\n");
             printf("%-20s %-20s %-10s\n", "Nome", "Tipo", "Quantidade");
             printf("----------------------------------------------------\n");
@@ -100,6 +101,32 @@ int main() {
                 }
             }
             break;
+
+        case 4: {
+            // 🔍 
+            char nomeBusca[50];
+            int encontrado = 0;
+
+            printf("Digite o nome do item que deseja buscar: ");
+            scanf(" %[^\n]", nomeBusca);
+
+            for (i = 0; i < MAX_ITENS; i++) {
+                if (mochila[i].ativo == 1 && strcmp(mochila[i].nome, nomeBusca) == 0) {
+                    encontrado = 1;
+
+                    printf("\n===== ITEM ENCONTRADO =====\n");
+                    printf("Nome: %s\n", mochila[i].nome);
+                    printf("Tipo: %s\n", mochila[i].tipo);
+                    printf("Quantidade: %d\n", mochila[i].quantidade);
+                    break;
+                }
+            }
+
+            if (!encontrado) {
+                printf("Item nao encontrado!\n");
+            }
+            break;
+        }
 
         case 0:
             printf("Saindo...\n");
